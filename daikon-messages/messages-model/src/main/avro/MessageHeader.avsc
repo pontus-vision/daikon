@@ -74,6 +74,11 @@
       "doc" : "User's security token",
       "type" : ["null", "string"],
       "secured": true
+    },
+    {
+      "name" : "schemaUri",
+      "doc" : "A link to the schema that the message body adheres to. (e.g. http://org.talend.message/customer-logs/v1)",
+      "type" : ["null", "string"]
     }
   ]
 }
