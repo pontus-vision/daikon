@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background: linear-gradient(90deg,#17486e 20%,#009597 80%); padding: 8px 8px 17px 8px;
+  min-height: 3em;
+}
+
+.api-popup-title {
+    display: none;
+}
+.swagger-section .auth_container .auth__title {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #202020;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+#api_info {
+    display: none;
+}
+.swagger-section #auth_container {
+    padding: 0px;
+    height: auto;
+    width: auto;
+}
+.swagger-section #auth_container .authorize__btn {
+    background-color: #0f6ab4;
+    display: inline-block;
+    font-size: .7em;
+    text-align: center;
+    padding: 7px 9px;
+    border-radius: 2px;
+}
+.swagger-section #auth_container .authorize__btn:hover {
+    background-color: #0f6ab4;
+}
+
+.header-bar-items {
+    align-items: center;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.header-bar-item {
+    height: 100%;
+    list-style: none;
+}
+.header_title {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFF;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.App-link {
+  color: #61dafb;
+}

@@ -18,6 +18,7 @@
     <modules>
         <module>daikon-spring-example-security</module>
         <module>daikon-spring-example-metrics</module>
+        <module>daikon-spring-example-swagger</module>
     </modules>
 
     <build>
