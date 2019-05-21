@@ -2,7 +2,6 @@ package org.talend.daikon.crypto;
 
 import java.security.Key;
 import java.security.spec.AlgorithmParameterSpec;
-import java.util.Base64;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -16,9 +15,9 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class CipherSources {
 
-    private static final Function<byte[], String> BASE64_ENCODER = bytes -> Base64.getEncoder().encodeToString(bytes);
+    private static final Function<byte[], String> BASE64_ENCODER = bytes -> EncodingUtils.BASE64_ENCODER.apply(bytes);
 
-    private static final Function<byte[], byte[]> BASE64_DECODER = bytes -> Base64.getDecoder().decode(bytes);
+    private static final Function<byte[], byte[]> BASE64_DECODER = bytes -> EncodingUtils.BASE64_DECODER.apply(bytes);
 
     private static final String ENCODING = "UTF-8";
 
@@ -108,11 +107,10 @@ public class CipherSources {
         };
     }
 
-    /**
-     * @return A {@link CipherSource} using Blowfish encryption.
-     */
-    public static CipherSource blowfish() throws Exception {
-        int ivLength = 8;
+    public static CipherSource blowfish(int ivLength) throws Exception {
+        if ((ivLength & 7) != 0 && Stream.of(128, 120, 112, 104, 96).noneMatch(i -> i == ivLength)) {
+            throw new IllegalArgumentException("Invalid IV length");
+        }
 
         return new CipherSource() {
 
@@ -151,5 +149,12 @@ public class CipherSources {
                 return new String(cipher.doFinal(encryptedBytes, ivLength, encryptedBytes.length - ivLength), ENCODING);
             }
         };
+    }
+
+    /**
+     * @return A {@link CipherSource} using Blowfish encryption.
+     */
+    public static CipherSource blowfish() throws Exception {
+        return blowfish(8);
     }
 }

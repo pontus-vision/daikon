@@ -41,6 +41,15 @@ public class CipherSourcesTest {
     }
 
     @Test
+    public void shouldGenerateDifferentValuesWithBlowfish() throws Exception {
+        final CipherSource source = CipherSources.blowfish();
+        final String encrypt1 = source.encrypt(KeySources.machineUID(16), "String");
+        final String encrypt2 = source.encrypt(KeySources.machineUID(16), "String");
+
+        assertNotEquals(encrypt1, encrypt2);
+    }
+
+    @Test
     public void shouldRoundtripWithBlowfish() throws Exception {
         assertRoundTrip(CipherSources.blowfish());
     }
