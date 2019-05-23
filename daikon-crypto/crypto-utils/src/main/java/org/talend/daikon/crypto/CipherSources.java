@@ -10,14 +10,13 @@ import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import static org.talend.daikon.crypto.EncodingUtils.BASE64_DECODER;
+import static org.talend.daikon.crypto.EncodingUtils.BASE64_ENCODER;
+
 /**
  * A helper class to provide common {@link CipherSource} implementations.
  */
 public class CipherSources {
-
-    private static final Function<byte[], String> BASE64_ENCODER = bytes -> EncodingUtils.BASE64_ENCODER.apply(bytes);
-
-    private static final Function<byte[], byte[]> BASE64_DECODER = bytes -> EncodingUtils.BASE64_DECODER.apply(bytes);
 
     private static final String ENCODING = "UTF-8";
 
@@ -107,11 +106,11 @@ public class CipherSources {
         };
     }
 
-    public static CipherSource blowfish(int ivLength) throws Exception {
-        if ((ivLength & 7) != 0 && Stream.of(128, 120, 112, 104, 96).noneMatch(i -> i == ivLength)) {
-            throw new IllegalArgumentException("Invalid IV length");
-        }
-
+    /**
+     * @return A {@link CipherSource} using Blowfish encryption.
+     */
+    public static CipherSource blowfish() throws Exception {
+        int ivLength = 8; //blowfish uses 64bits only
         return new CipherSource() {
 
             private Cipher get(KeySource source, int mode, byte[] iv) throws Exception {
@@ -149,12 +148,5 @@ public class CipherSources {
                 return new String(cipher.doFinal(encryptedBytes, ivLength, encryptedBytes.length - ivLength), ENCODING);
             }
         };
-    }
-
-    /**
-     * @return A {@link CipherSource} using Blowfish encryption.
-     */
-    public static CipherSource blowfish() throws Exception {
-        return blowfish(8);
     }
 }

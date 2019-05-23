@@ -1,9 +1,11 @@
 package org.talend.daikon.crypto;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+
+import javax.crypto.BadPaddingException;
+
+import org.junit.Test;
 
 public class CipherSourcesTest {
 
@@ -49,9 +51,56 @@ public class CipherSourcesTest {
         assertNotEquals(encrypt1, encrypt2);
     }
 
+    @Test(expected = BadPaddingException.class)
+    public void blowfishUnableToDecrypt() throws Exception {
+        String aWonderfulString = "aWonderfulString";
+
+        final Encryption encryptionAES = new Encryption(KeySources.machineUID(16), CipherSources.getDefault());
+        String encryptedAESString = encryptionAES.encrypt(aWonderfulString);
+
+        final Encryption encryptionBlowfish = new Encryption(KeySources.machineUID(16), CipherSources.blowfish());
+
+        final String decryptedString = encryptionBlowfish.decrypt(encryptedAESString);
+        assertNotEquals(decryptedString, aWonderfulString);
+    }
+
     @Test
     public void shouldRoundtripWithBlowfish() throws Exception {
         assertRoundTrip(CipherSources.blowfish());
+    }
+
+    @Test
+    public void changeIVEncryptionString() throws Exception {
+        String expectedString = "aWonderfulString";
+        final Encryption encryption = new Encryption(KeySources.machineUID(16), CipherSources.blowfish());
+
+        String encryptedResult = encryption.encrypt(expectedString);
+
+        //modify encrypted String
+        char[] encryptedChar = encryptedResult.toCharArray();
+        encryptedChar[0] = (char) (encryptedChar[0]+1);
+        encryptedResult = String.valueOf(encryptedChar);
+
+        //check that decryption
+        assertNotEquals(expectedString, encryption.decrypt(encryptedResult));
+
+    }
+
+    @Test
+    public void changeEncryptedPayloadString() throws Exception {
+        String expectedString = "aWonderfulString";
+        final Encryption encryption = new Encryption(KeySources.machineUID(16), CipherSources.blowfish());
+
+        String encryptedResult = encryption.encrypt(expectedString);
+
+        //modify encrypted String
+        char[] encryptedChar = encryptedResult.toCharArray();
+        encryptedChar[10] = (char) (encryptedChar[10]+1);
+        encryptedResult = String.valueOf(encryptedChar);
+
+        //check that decryption
+        assertNotEquals(expectedString, encryption.decrypt(encryptedResult));
+
     }
 
     private void assertRoundTrip(CipherSource cipherSource) throws Exception {
