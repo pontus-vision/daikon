@@ -226,7 +226,7 @@
     <pluginRepository>
       <id>talend-opensource-release</id>
       <name>talend-opensource-release</name>
-      <url>https://artifacts-oss.talend.com/nexus/content/repositories/TalendOpenSourceRelease/</url>
+      <url>https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceRelease/</url>
       <releases>
         <enabled>true</enabled>
       </releases>

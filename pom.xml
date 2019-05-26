@@ -15,11 +15,13 @@
     </licenses>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.7</java.version>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <talend_snapshots>https://artifacts-oss.talend.com/nexus/content/repositories/TalendOpenSourceSnapshot/</talend_snapshots>
-        <talend_snapshots_deployment>https://artifacts-oss.talend.com/nexus/content/repositories/TalendOpenSourceSnapshot/</talend_snapshots_deployment>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <talend_snapshots>https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceSnapshot/
+        </talend_snapshots>
+        <talend_releases>https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceRelease/
+        </talend_releases>
         <pushChanges>false</pushChanges>
 	    <jackson.1x.version>1.9.14-TALEND</jackson.1x.version>
 	    <jackson.version>2.9.4</jackson.version>
@@ -59,7 +61,7 @@
         <repository>
             <id>talend-opensource-release</id>
             <name>talend-opensource-release</name>
-            <url>https://artifacts-oss.talend.com/nexus/content/repositories/TalendOpenSourceRelease/</url>
+            <url>https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceRelease/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -72,7 +74,7 @@
         <pluginRepository>
             <id>talend-opensource-snapshot</id>
             <name>talend-opensource-snapshot</name>
-            <url>https://artifacts-oss.talend.com/nexus/content/repositories/TalendOpenSourceSnapshot/</url>
+            <url>https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceSnapshot/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -83,7 +85,7 @@
         <pluginRepository>
             <id>talend-opensource-release</id>
             <name>talend-opensource-release</name>
-            <url>https://artifacts-oss.talend.com/nexus/content/repositories/TalendOpenSourceRelease/</url>
+            <url>https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceRelease/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -99,7 +101,7 @@
         </snapshotRepository>
         <repository>
             <id>talend_nexus_deployment</id>
-            <url>https://artifacts-oss.talend.com/nexus/content/repositories/TalendOpenSourceRelease/</url>
+            <url>https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceRelease/</url>
         </repository>
     </distributionManagement>
     <dependencyManagement>
@@ -140,7 +142,7 @@
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
+                <!--plugin>
                     <groupId>net.revelc.code.formatter</groupId>
                     <artifactId>formatter-maven-plugin</artifactId>
                     <version>2.0.1</version>
@@ -155,7 +157,7 @@
                             <version>0.1.0</version>
                         </dependency>
                     </dependencies>
-                </plugin>
+                </plugin -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
