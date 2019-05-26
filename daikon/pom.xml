@@ -117,14 +117,14 @@
 			<version>2.2.15</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
 			<!-- this is actually excluded from the test class path cause it is being 
 				loaded dynamically by the tests -->
+		<!--dependency>
 			<groupId>org.talend.test</groupId>
 			<artifactId>zeLib</artifactId>
 			<version>0.0.1</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency -->
 		<dependency>
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-log4j12</artifactId>
